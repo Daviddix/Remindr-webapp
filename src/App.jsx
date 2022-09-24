@@ -12,7 +12,7 @@ function App() {
   const [remindrs, setRemindrs] = useState([])
   const [title, setTitle] = useState("")
   const [minutes, setMinutes] = useState(0)
-  const [hours, setHours] = useState(1)
+  const [hours, setHours] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const [vibrate, setVibrate] = useState(false)
 
@@ -23,6 +23,25 @@ function App() {
 
   const [deleteId, setDeleteId] = useState(0)
   const [oneToEdit, setOneToEdit] = useState({})
+
+  function createNotification(title, vibrate, hours, minutes, seconds){
+    const hoursInMil = hours * 3600000
+      const minsInMil = minutes * 6000
+      const secsInMil = seconds * 1000
+      const timeToRun = hoursInMil + minsInMil + secsInMil
+      console.log(hoursInMil, secsInMil, minsInMil, timeToRun);
+    setInterval(() => {
+      Notification.requestPermission()
+        .then((p)=>{
+          new Notification(title, {
+            body:`time to  ${title}, and notification will play in ${hours} hours ${minutes} minutes ${seconds} seconds`,
+            vibrate: true,
+            silent:false
+          })
+        })
+    },timeToRun);
+   
+  }  
 
   function addRemindrFunction(title, vibrate, hours, minutes, seconds){
     if (title.trim()) {
@@ -42,6 +61,7 @@ function App() {
     setMinutes(0)
     setSeconds(0)
     setToggleAddPopup(false)
+    createNotification(title, vibrate, hours, minutes, seconds)
     }else{
       alert("please enter a title")
       setTitle("")

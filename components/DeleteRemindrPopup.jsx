@@ -1,4 +1,15 @@
+import { useEffect } from "react";
+
 function DeleteRemindrPopup({setToggleDeletePopup, setDeleteId, deleteId, remindrs, setRemindrs}) {
+
+   useEffect(()=>{
+    document.body.style.overflow = "hidden"
+
+    return ()=>{
+      document.body.style.overflow = "auto"
+    }
+
+  })
 
   function deleteRemindr(id){
         const newRemindrs = remindrs.filter((remindr) => remindr.id !== id)
