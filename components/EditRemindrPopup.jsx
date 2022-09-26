@@ -17,7 +17,7 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
 
   })
 
-  const numsHours = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+  const numsHours = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
 
   const optsHours = numsHours.map((num)=>{
     return  <option key={num} value={num}>{num}</option>
@@ -30,16 +30,47 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
   })
 
   function updateRemindrs(){
+    if (newHours == 0 && newMinutes == 0 && newSeconds == 0) {
+      return alert("please enter a valid number")
+    }
     const updatedRemindrs= remindrs.filter((remindr)=> remindr.id != oneToEdit[0].id)
+
+    let timerId
+  function createNotification(title, vibrate, hours, minutes, seconds){
+    const hoursInMil = hours * 3600000
+      const minsInMil = minutes * 6000
+      const secsInMil = seconds * 1000
+      const timeToRun = hoursInMil + minsInMil + secsInMil
+      timerId = setInterval(() => {
+        Notification.requestPermission()
+        .then((p)=>{
+          new Notification(title, {
+            body:`time to  ${title}, and notification will play in ${hours} hours ${minutes} minutes ${seconds} seconds`,
+            vibrate: vibrate,
+            silent:false
+          })
+        })
+    },timeToRun);
+   
+  } 
     
     const updatedOne = {
-      title : newInput,
+      title : newInput.length <= 0? oneToEdit[0].title : newInput,
       id : oneToEdit[0].id,      
       vibrate : newVibrate,
       hours: newHours,
       minutes: newMinutes,
-      seconds: newSeconds
+      seconds: newSeconds,
+      startSendingNotifications: setTimeout(function timer(){
+        createNotification(newInput, newVibrate, newHours, newMinutes, newSeconds) 
+      }, 0),
+      stopSendingNotifications: function t() {
+        clearInterval(timerId)
+      }
     }
+
+    oneToEdit[0].stopSendingNotifications()
+    updatedOne.startSendingNotifications
     updatedRemindrs.push(updatedOne)
     setRemindrs(updatedRemindrs)
     setToggleEditPopup(false)

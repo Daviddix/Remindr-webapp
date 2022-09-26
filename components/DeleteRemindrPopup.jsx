@@ -13,6 +13,8 @@ function DeleteRemindrPopup({setToggleDeletePopup, setDeleteId, deleteId, remind
 
   function deleteRemindr(id){
         const newRemindrs = remindrs.filter((remindr) => remindr.id !== id)
+        const currentRemindr = remindrs.filter((remindr) => remindr.id == id)
+        currentRemindr[0].stopSendingNotifications()
 
         setRemindrs(newRemindrs)
     }

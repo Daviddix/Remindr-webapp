@@ -23,19 +23,20 @@ function App() {
 
   const [deleteId, setDeleteId] = useState(0)
   const [oneToEdit, setOneToEdit] = useState({})
+  const [stopTimer, setStopTimer] = useState(false)
 
+  let timerId
   function createNotification(title, vibrate, hours, minutes, seconds){
     const hoursInMil = hours * 3600000
       const minsInMil = minutes * 6000
       const secsInMil = seconds * 1000
       const timeToRun = hoursInMil + minsInMil + secsInMil
-      console.log(hoursInMil, secsInMil, minsInMil, timeToRun);
-    setInterval(() => {
-      Notification.requestPermission()
+      timerId = setInterval(() => {
+        Notification.requestPermission()
         .then((p)=>{
           new Notification(title, {
             body:`time to  ${title}, and notification will play in ${hours} hours ${minutes} minutes ${seconds} seconds`,
-            vibrate: true,
+            vibrate: vibrate,
             silent:false
           })
         })
@@ -45,14 +46,26 @@ function App() {
 
   function addRemindrFunction(title, vibrate, hours, minutes, seconds){
     if (title.trim()) {
+      if (hours == 0 && minutes == 0 && seconds == 0) {
+        return alert("please enter a valid number")
+      }
       const newObj = {
       title: title,
       vibrate: vibrate,
       hours: hours,
       minutes: minutes,
       seconds:seconds,
-      id: Date.now()
+      id: Date.now(),
+      startSendingNotifications: setTimeout(function timer(){
+        createNotification(title, vibrate, hours, minutes, seconds) 
+      }, 0),
+      stopSendingNotifications: function t() {
+        clearInterval(timerId)
+      }
+      
     }
+
+    newObj.startSendingNotifications
 
     setRemindrs((prev)=> [...prev, newObj])
     setTitle("")
@@ -61,7 +74,8 @@ function App() {
     setMinutes(0)
     setSeconds(0)
     setToggleAddPopup(false)
-    createNotification(title, vibrate, hours, minutes, seconds)
+
+    
     }else{
       alert("please enter a title")
       setTitle("")
