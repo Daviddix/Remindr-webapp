@@ -26,8 +26,20 @@ function AddRemindrPopup({title, setTitle, vibrate, setVibrate, setRemindrs, add
 
 
   return (
-    <div className="overlay">
-      <div className="add-remindr-popup">
+    <div 
+    onClick={()=>{
+      setToggleAddPopup(false)
+      setTitle("")
+      setHours(0)
+      setMinutes(0)
+      setSeconds(0)
+      setVibrate(false)
+    }}
+    className="overlay">
+
+      <div 
+      onClick={(e)=> e.stopPropagation()}
+      className="add-remindr-popup">
     <h2>Add a new remindr</h2>
 
     <div className="title">
@@ -88,10 +100,12 @@ function AddRemindrPopup({title, setTitle, vibrate, setVibrate, setRemindrs, add
       id="vibrate" />
     </div>
 
-    {title && <div className="overview">
+    <div className="overview">
       <p>Overview</p>
-      <p className="output">"Remind me to {title} every {hours} hour, {minutes} minutes, {seconds} Seconds"</p>
-    </div>}
+      {title && 
+      <p className="output">
+        Remind me to {title} every {hours > 0 && `${hours} hour${hours > 1? "s" : ""}`} {minutes > 0 && `${minutes} minute${minutes > 1? "s" : ""}`} {seconds > 0 && `${seconds} second${seconds > 1? "s" : ""}`} </p>}
+    </div>
 
     <div className="bottom-buttons">
       <button 

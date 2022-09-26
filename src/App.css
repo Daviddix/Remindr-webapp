@@ -336,6 +336,10 @@ main .single-remindr{
   margin:0 0 .5rem;
 }
 
+.single-remindr p.remindr-title::first-letter{
+  text-transform: capitalize;
+}
+
 .single-remindr .time{
   font-size: 1.1rem;
   letter-spacing: 1px;

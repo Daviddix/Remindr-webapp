@@ -28,16 +28,17 @@ function App() {
   let timerId
   function createNotification(title, vibrate, hours, minutes, seconds){
     const hoursInMil = hours * 3600000
-      const minsInMil = minutes * 6000
+      const minsInMil = minutes * 60000
       const secsInMil = seconds * 1000
       const timeToRun = hoursInMil + minsInMil + secsInMil
       timerId = setInterval(() => {
         Notification.requestPermission()
         .then((p)=>{
           new Notification(title, {
-            body:`time to  ${title}, and notification will play in ${hours} hours ${minutes} minutes ${seconds} seconds`,
+            body:`Time to ${title}, it's been ${hours > 0? hours + " hours" : ""}${minutes > 0? minutes + " minutes" : ""}${seconds > 0?seconds + " seconds" : ""} already`,
             vibrate: vibrate,
-            silent:false
+            silent:false,
+            icon: "src\assets\clock.svg"
           })
         })
     },timeToRun);

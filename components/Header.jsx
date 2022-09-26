@@ -3,10 +3,11 @@ import sun from "../src/assets/sun.svg"
 import { useEffect, useState } from "react"
 
 function Header({setToggleAddPopup}) {
-  const [darkMode, setDarkmode] = useState(true)
+  const [darkMode, setDarkmode] = useState(false)
 
   useEffect(()=>{
     if (darkMode) {
+      
     document.documentElement.style.setProperty('--normalBlue', 'var(--lightBlue)') 
 
     document.documentElement.style.setProperty('--white', 'var(--darkBlue)') 
@@ -29,7 +30,6 @@ function Header({setToggleAddPopup}) {
     }
 
     else{
-      
       document.documentElement.style.setProperty('--normalBlue', 'hsl(210, 77%, 39%)') 
 
     document.documentElement.style.setProperty('--white', '#fff') 

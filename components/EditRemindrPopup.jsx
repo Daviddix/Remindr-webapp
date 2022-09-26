@@ -78,8 +78,14 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
 
 
   return (
-    <div className="overlay">
-      <div className="add-remindr-popup">
+    <div 
+    onClick={(e)=>{
+      setToggleEditPopup(false)
+    } }
+    className="overlay">
+      <div 
+      onClick={(e)=> e.stopPropagation()}
+      className="add-remindr-popup">
     <h2>Edit remindr</h2>
 
     <div className="title">
@@ -144,7 +150,9 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
 
     <div className="overview">
       <p>Overview</p>
-      <p className="output">"Remind me to {newInput} every {newHours} hour, {newMinutes} minutes, {newSeconds} Seconds"</p>
+      {newInput && 
+      <p className="output">
+        Remind me to {newInput} every {newHours > 0 && `${newHours} hour${newHours > 1? "s" : ""}`} {newMinutes > 0 && `${newMinutes} minute${newMinutes > 1? "s" : ""}`} {newSeconds > 0 && `${newSeconds} second${newSeconds > 1? "s" : ""}`} </p>}
     </div>
 
     <div className="bottom-buttons">

@@ -2,19 +2,18 @@ import clock from "../src/assets/clock.svg"
 import edit from "../src/assets/edit.svg"
 import trash from "../src/assets/trash.svg"
 
-function Remindr({title, vibrate, id, remindrs, setRemindrs, setToggleDeletePopup, setDeleteId, setToggleEditPopup, setOneToEdit, hours, minutes, seconds}) {
+function Remindr({title, vibrate, id, remindrs, setRemindrs, setToggleDeletePopup, setDeleteId, setToggleEditPopup, setOneToEdit, hours, minutes, seconds, date}) {
 
     function getEditId(id){
         const editMe = remindrs.filter((remindr)=> remindr.id == id)
 
         setOneToEdit(editMe)
     }
-
     return ( 
         <div className="single-remindr">
             <p className="remindr-title">{title}</p>
             <p className="time">
-                Every {hours} hour{hours > 1? "s" : ""} {minutes} minute{minutes > 1? "s" : ""}  {seconds} second{seconds > 1? "s" : ""} </p>
+                Every  {hours > 0 && `${hours} hour${hours > 1? "s" : ""}`} {minutes > 0 && `${minutes} minute${minutes > 1? "s" : ""}`} {seconds > 0 && `${seconds} second${seconds > 1? "s" : ""}`} </p>
 
             <div className="bottom">
                 <div className="date-created">
