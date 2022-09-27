@@ -67,14 +67,16 @@ html{
 main{
   background-color: var(--white);
   min-height: 100vh;
-  padding: 0 0 4rem;
+  padding: .01rem 0 4rem;
 }
 
 header{
-  max-width: 100%;
+  width: 100%;
   border-bottom: 2px solid var(--lightBorderBottom);
   box-shadow: 0 1px 2px 2px var(--lightBorderShadow);
   padding: 2rem 0rem;
+  position: fixed;
+  background-color: var(--white);
 }
 
 header .header-inner{
@@ -98,7 +100,7 @@ header .header-inner{
 
 h1.heading{
   color: var(--normalBlue);
-  margin: 4rem auto 2rem auto;
+  margin: 10rem auto 2rem auto;
   max-width: fit-content;
   font-size: 2rem;
   letter-spacing: 1px;
@@ -243,6 +245,7 @@ main .overlay{
   -o-border-radius: .4rem;
   width: 6.5rem;
   cursor: pointer;
+  background-color: whitesmoke;
 }
 
 .add-remindr-popup .vibrate{
@@ -376,6 +379,10 @@ main .single-remindr{
   margin: 0 .8rem 0 0;
 }
 
+.edit-and-delete img{
+  max-width: 3rem;
+}
+
 /* styling for the delete reminder popup  */
 .delete-remindr-popup h2{
   color: var(--blackDelete);
@@ -496,6 +503,11 @@ main .single-remindr{
   -o-transform: scale(1.1);
 }
 
+.edit-and-delete img:hover
+{
+  background-color: hsla(210, 77%, 69%, 0.034);
+}
+
 button:hover{
   cursor: pointer;
 }
@@ -507,7 +519,7 @@ button:hover{
 }
 
 main button.add-remindrs:hover{
-  box-shadow: 0 .2rem 1rem .2rem hsla(210, 77%, 69%, 0.301);
+  box-shadow: 0 .2rem 1rem .2rem hsla(210, 77%, 39%, 0.199);
   }
 
 main button.add-remindrs:active{

@@ -1,12 +1,20 @@
 import moon from "../src/assets/moon.svg"
 import sun from "../src/assets/sun.svg"
-import { useEffect, useState } from "react"
+import { useEffect,useLayoutEffect, useState } from "react"
 
 function Header({setToggleAddPopup}) {
-  const [darkMode, setDarkmode] = useState(false)
+  const [theme, setTheme] = useState("light")
+
+  useLayoutEffect(()=>{
+    if (localStorage.getItem("remindr-theme") == null) {
+      localStorage.setItem("remindr-theme", theme)
+    }else{
+      setTheme(localStorage.getItem("remindr-theme"))
+    }
+  }, [])
 
   useEffect(()=>{
-    if (darkMode) {
+    if (theme == "dark") {
       
     document.documentElement.style.setProperty('--normalBlue', 'var(--lightBlue)') 
 
@@ -53,7 +61,8 @@ function Header({setToggleAddPopup}) {
   })
 
   function themeSwitcher(){
-    setDarkmode((prev) => !prev) 
+    setTheme((prev) => prev == "light"? "dark" : "light") 
+    localStorage.setItem("remindr-theme", theme == "light"? "dark" : "light")
   }
 
   return (
@@ -63,7 +72,7 @@ function Header({setToggleAddPopup}) {
 
 <div className="options">
   <img 
-  src={darkMode? sun : moon} 
+  src={theme == "dark" ? sun : moon} 
   alt="switch between light and dark mode"
   onClick={themeSwitcher}
   />
@@ -75,7 +84,7 @@ width="24"
 height="24" 
 viewBox="0 0 24 24"
 fill="none" 
-stroke={darkMode ? "hsl(210, 77%, 69%)" : "hsl(210, 77%, 39%)"} 
+stroke={theme == "dark" ? "hsl(210, 77%, 69%)" : "hsl(210, 77%, 39%)"} 
 strokeWidth="2" 
 strokeLinecap="round" 
 strokeLinejoin="round" >

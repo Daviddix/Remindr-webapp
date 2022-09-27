@@ -21,8 +21,12 @@ function DeleteRemindrPopup({setToggleDeletePopup, setDeleteId, deleteId, remind
 
 
   return (
-    <div className="overlay">
-       <div className="delete-remindr-popup">
+    <div 
+    onClick={()=>setToggleDeletePopup(false)}
+    className="overlay">
+       <div 
+       onClick={(e)=> e.stopPropagation()}
+       className="delete-remindr-popup">
       <h2>Delete Remindr</h2>
 
       <p>Are you sure you want to delete this remindr?</p>

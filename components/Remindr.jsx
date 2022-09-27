@@ -13,7 +13,7 @@ function Remindr({title, vibrate, id, remindrs, setRemindrs, setToggleDeletePopu
         <div className="single-remindr">
             <p className="remindr-title">{title}</p>
             <p className="time">
-                Every  {hours > 0 && `${hours} hour${hours > 1? "s" : ""}`} {minutes > 0 && `${minutes} minute${minutes > 1? "s" : ""}`} {seconds > 0 && `${seconds} second${seconds > 1? "s" : ""}`} </p>
+                Every  {hours > 0 && `${hours} hour${hours > 1? "s" : ""}`} {minutes > 0 && `${minutes} minute${minutes > 1? "s" : ""}`}  {seconds > 0 && `${seconds} second${seconds > 1? "s" : ""}`} </p>
 
             <div className="bottom">
                 <div className="date-created">

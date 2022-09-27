@@ -27,6 +27,11 @@ function App() {
 
   let timerId
   function createNotification(title, vibrate, hours, minutes, seconds){
+    const s = seconds>1? "s" : ""
+    const h = hours>1? "s" : ""
+    const m = minutes>1? "s" : ""
+
+
     const hoursInMil = hours * 3600000
       const minsInMil = minutes * 60000
       const secsInMil = seconds * 1000
@@ -35,10 +40,11 @@ function App() {
         Notification.requestPermission()
         .then((p)=>{
           new Notification(title, {
-            body:`Time to ${title}, it's been ${hours > 0? hours + " hours" : ""}${minutes > 0? minutes + " minutes" : ""}${seconds > 0?seconds + " seconds" : ""} already`,
+            body:`Time to ${title}, it's been ${hours > 0? hours + " hour"+h : ""}${minutes > 0? minutes + " minute"+m : ""}${seconds > 0?seconds + " second"+s : ""} already:)`,
             vibrate: vibrate,
             silent:false,
-            icon: "src\assets\clock.svg"
+            icon: "./src/assets/Remindr.png",
+            tag: "notif"
           })
         })
     },timeToRun);
@@ -68,7 +74,7 @@ function App() {
 
     newObj.startSendingNotifications
 
-    setRemindrs((prev)=> [...prev, newObj])
+    setRemindrs((prev)=> [newObj, ...prev])
     setTitle("")
     setVibrate(false)
     setHours(0)

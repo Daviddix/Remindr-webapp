@@ -35,24 +35,32 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
     }
     const updatedRemindrs= remindrs.filter((remindr)=> remindr.id != oneToEdit[0].id)
 
+  
     let timerId
-  function createNotification(title, vibrate, hours, minutes, seconds){
-    const hoursInMil = hours * 3600000
-      const minsInMil = minutes * 6000
-      const secsInMil = seconds * 1000
-      const timeToRun = hoursInMil + minsInMil + secsInMil
-      timerId = setInterval(() => {
-        Notification.requestPermission()
-        .then((p)=>{
-          new Notification(title, {
-            body:`time to  ${title}, and notification will play in ${hours} hours ${minutes} minutes ${seconds} seconds`,
-            vibrate: vibrate,
-            silent:false
+    function createNotification(title, vibrate, hours, minutes, seconds){
+      const s = seconds>1? "s" : ""
+      const h = hours>1? "s" : ""
+      const m = minutes>1? "s" : ""
+  
+  
+      const hoursInMil = hours * 3600000
+        const minsInMil = minutes * 60000
+        const secsInMil = seconds * 1000
+        const timeToRun = hoursInMil + minsInMil + secsInMil
+        timerId = setInterval(() => {
+          Notification.requestPermission()
+          .then((p)=>{
+            new Notification(title, {
+              body:`Time to ${title}, it's been ${hours > 0? hours + " hour"+h : ""}${minutes > 0? minutes + " minute"+m : ""}${seconds > 0?seconds + " second"+s : ""} already:)`,
+              vibrate: vibrate,
+              silent:false,
+              icon: "./src/assets/Remindr.png",
+              tag: "notif"
+            })
           })
-        })
-    },timeToRun);
-   
-  } 
+      },timeToRun);
+     
+    }  
     
     const updatedOne = {
       title : newInput.length <= 0? oneToEdit[0].title : newInput,
@@ -71,7 +79,7 @@ function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remin
 
     oneToEdit[0].stopSendingNotifications()
     updatedOne.startSendingNotifications
-    updatedRemindrs.push(updatedOne)
+    updatedRemindrs.unshift(updatedOne)
     setRemindrs(updatedRemindrs)
     setToggleEditPopup(false)
   }
