@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function DeleteRemindrPopup({setToggleDeletePopup, setDeleteId, deleteId, remindrs, setRemindrs}) {
+function DeleteRemindrPopup({setToggleDeletePopup, deleteId, remindrs, setRemindrs}) {
 
    useEffect(()=>{
     document.body.style.overflow = "hidden"

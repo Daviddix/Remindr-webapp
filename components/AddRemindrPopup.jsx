@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-function AddRemindrPopup({title, setTitle, vibrate, setVibrate, setRemindrs, addRemindrFunction, setToggleAddPopup, minutes, seconds, hours, setMinutes, setSeconds, setHours}) {
+function AddRemindrPopup({title, setTitle, vibrate, setVibrate, addRemindrFunction, setToggleAddPopup, minutes, seconds, hours, setMinutes, setSeconds, setHours}) {
 
   useEffect(()=>{
     document.body.style.overflow = "hidden"

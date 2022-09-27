@@ -1,8 +1,11 @@
+import { useState } from "react"
 import clock from "../src/assets/clock.svg"
 import edit from "../src/assets/edit.svg"
 import trash from "../src/assets/trash.svg"
 
 function Remindr({title, vibrate, id, remindrs, setRemindrs, setToggleDeletePopup, setDeleteId, setToggleEditPopup, setOneToEdit, hours, minutes, seconds, date}) {
+
+    const [dateT, setDate] = useState(new Date())
 
     function getEditId(id){
         const editMe = remindrs.filter((remindr)=> remindr.id == id)
@@ -19,7 +22,7 @@ function Remindr({title, vibrate, id, remindrs, setRemindrs, setToggleDeletePopu
                 <div className="date-created">
                     <img src={clock} alt="a clock icon" />
 
-                    <small>Just now</small>
+                    <small>{dateT.toUTCString().replace("GMT", "")}</small>
                 </div>
 
                 <div className="edit-and-delete">

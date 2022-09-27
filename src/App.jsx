@@ -23,7 +23,6 @@ function App() {
 
   const [deleteId, setDeleteId] = useState(0)
   const [oneToEdit, setOneToEdit] = useState({})
-  const [stopTimer, setStopTimer] = useState(false)
 
   let timerId
   function createNotification(title, vibrate, hours, minutes, seconds){
@@ -140,7 +139,6 @@ function App() {
      setMinutes={setMinutes}
      seconds={seconds}
      setSeconds={setSeconds}
-     setRemindrs = {setRemindrs}
      addRemindrFunction={addRemindrFunction}
      setToggleAddPopup={setToggleAddPopup}
      />}

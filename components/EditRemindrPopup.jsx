@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 
-function EditRemindrPopup({toggleEditPopup, setToggleEditPopup, oneToEdit, remindrs, setRemindrs}) {
+function EditRemindrPopup({setToggleEditPopup, oneToEdit, remindrs, setRemindrs}) {
 
   const [newInput, setNewInput] = useState(oneToEdit[0].title)
   const [newVibrate, setNewVibrate] = useState(oneToEdit[0].vibrate)
