@@ -41,21 +41,19 @@ function EditRemindrPopup({setToggleEditPopup, oneToEdit, remindrs, setRemindrs}
       const s = seconds>1? "s" : ""
       const h = hours>1? "s" : ""
       const m = minutes>1? "s" : ""
-  
+      const notificationPromise = Notification.requestPermission()
   
       const hoursInMil = hours * 3600000
         const minsInMil = minutes * 60000
         const secsInMil = seconds * 1000
         const timeToRun = hoursInMil + minsInMil + secsInMil
         timerId = setInterval(() => {
-          Notification.requestPermission()
-          .then((p)=>{
+          notificationPromise.then((p)=>{
             new Notification(title, {
               body:`Time to ${title}, it's been ${hours > 0? hours + " hour"+h : ""}${minutes > 0? minutes + " minute"+m : ""}${seconds > 0?seconds + " second"+s : ""} already:)`,
               vibrate: vibrate,
               silent:false,
-              icon: "./src/assets/Remindr.png",
-              tag: "notif"
+              icon: "./src/assets/Remindr.png"
             })
           })
       },timeToRun);
