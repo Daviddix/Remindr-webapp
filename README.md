@@ -44,6 +44,7 @@ I started with building the skeleton of the app with JSX only, I then used CSS f
 - CSS custom properties
 - Mobile-first workflow
 - ReactJS
+- Designed using inVisionStudio
 
 ## Author
 - Twitter - [@daviddixx](https://www.twitter.com/dixx_david)
