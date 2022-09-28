@@ -5,6 +5,7 @@ import { useEffect,useLayoutEffect, useState } from "react"
 function Header({setToggleAddPopup}) {
   const [theme, setTheme] = useState("light")
 
+  //checks if there is a theme stored in local storage
   useLayoutEffect(()=>{
     if (localStorage.getItem("remindr-theme") == null) {
       localStorage.setItem("remindr-theme", theme)
@@ -13,6 +14,7 @@ function Header({setToggleAddPopup}) {
     }
   }, [])
 
+  //checks the current theme
   useEffect(()=>{
     if (theme == "dark") {
       

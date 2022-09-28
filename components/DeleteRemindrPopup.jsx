@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 function DeleteRemindrPopup({setToggleDeletePopup, deleteId, remindrs, setRemindrs}) {
 
+  //removes overflow when shown
    useEffect(()=>{
     document.body.style.overflow = "hidden"
 
@@ -11,6 +12,7 @@ function DeleteRemindrPopup({setToggleDeletePopup, deleteId, remindrs, setRemind
 
   })
 
+  //function to delete the selected remindr
   function deleteRemindr(id){
         const newRemindrs = remindrs.filter((remindr) => remindr.id !== id)
         const currentRemindr = remindrs.filter((remindr) => remindr.id == id)

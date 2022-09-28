@@ -5,7 +5,7 @@ import DeleteRemindrPopup from "../components/DeleteRemindrPopup"
 import Remindr from "../components/Remindr"
 import './App.css'
 import EditRemindrPopup from "../components/EditRemindrPopup"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
   //necessary states
@@ -23,7 +23,9 @@ function App() {
 
   const [deleteId, setDeleteId] = useState(0)
   const [oneToEdit, setOneToEdit] = useState({})
+  
 
+  //function to create a new notification
   let timerId
   function createNotification(title, vibrate, hours, minutes, seconds){
     const s = seconds>1? "s" : ""
@@ -48,11 +50,13 @@ function App() {
    
   }  
 
+  //function to make a new remindr
   function addRemindrFunction(title, vibrate, hours, minutes, seconds){
     if (title.trim()) {
       if (hours == 0 && minutes == 0 && seconds == 0) {
-        return alert("please enter a valid number")
+        return alert("please pick a valid number")
       }
+      //creates a new object from the given parameters
       const newObj = {
       title: title,
       vibrate: vibrate,
@@ -69,8 +73,10 @@ function App() {
       
     }
 
+    //calls the startSendingNotifications functions which shows notifications based on the given interval
     newObj.startSendingNotifications
 
+    //adds the new object to the remindrs array
     setRemindrs((prev)=> [newObj, ...prev])
     setTitle("")
     setVibrate(false)
@@ -78,7 +84,6 @@ function App() {
     setMinutes(0)
     setSeconds(0)
     setToggleAddPopup(false)
-
     
     }else{
       alert("please enter a title")

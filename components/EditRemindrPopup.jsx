@@ -29,6 +29,7 @@ function EditRemindrPopup({setToggleEditPopup, oneToEdit, remindrs, setRemindrs}
     return  <option key={num} value={num}>{num}</option>
   })
 
+  //function to update the current remindr
   function updateRemindrs(){
     if (newHours == 0 && newMinutes == 0 && newSeconds == 0) {
       return alert("please enter a valid number")
