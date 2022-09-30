@@ -97,6 +97,7 @@ function App() {
   const remindersMapped= remindrs.map(({title, vibrate, id, hours, minutes, seconds}) =>{
     return <Remindr 
     id={id}
+    key={id}
     title={title} 
     remindrs={remindrs}
     setRemindrs={setRemindrs}
